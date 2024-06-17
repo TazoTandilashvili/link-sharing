@@ -39,6 +39,7 @@ submitButton.addEventListener('click', function (event) {
       const user = userCredential.user;
       alert('LOGGING INN...')
       // ...
+      window.location.href = 'preview.html'
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -46,5 +47,5 @@ submitButton.addEventListener('click', function (event) {
       alert(errorMessage)
       // ..
     });
-  console.log('i am thinking')
+
 })
