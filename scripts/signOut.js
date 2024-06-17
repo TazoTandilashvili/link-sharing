@@ -2,7 +2,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 
@@ -28,27 +28,19 @@ const auth = getAuth();
 
 
 
-const submitButton = document.getElementById('login-button');
+const signOutBtn = document.getElementById('sign-out');
 
-submitButton.addEventListener('click', function (event) {
+signOutBtn.addEventListener('click', function (event) {
   event.preventDefault();
-  const email = document.getElementById('email-login').value;
-  const password = document.getElementById('password-login').value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      alert('LOGGING INN...')
-      // ...
-      window.location.href = 'preview.html'
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-      // ..
-    });
+  const auth = getAuth();
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    alert('sign outt');
+    window.location.href = "index.html"
+  }).catch((error) => {
+    // An error happened.
+    alert('asdasd')
+  });
 });
 
 // signout
