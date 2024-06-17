@@ -1,99 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Link-sharing app</title>
-</head>
-<body>
-  <section id="login-section">
-    <div id="logo">
-      <img src="./assets/images/logo-devlinks-small.svg" alt="logo">
-      <h1 class="logo-title">devlinks</h1>
-    </div>
-    <div class="login">
-      <h2 class="login-title">Login</h2>
-      <p class="login-propery">Add your details below to get back into the app</p>
-    </div>
-    <div class="login-form">
-      <div class="email">
-        <h3 class="form-title">Email address</h3>
-        <input type="text" placeholder="e.g.alex@email.com" id="email-login" class="login-input" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <script type="module" src="./scripts/auth.js" defer></script>
+    <script type="module" src="./scripts/login.js" defer></script>
+
+    <title>Frontend Mentor | Link-sharing app</title>
+  </head>
+  <body>
+    <section id="login-section">
+      <div id="logo">
+        <img src="./assets/images/logo-devlinks-small.svg" alt="logo" />
+        <h1 class="logo-title">devlinks</h1>
       </div>
-      <div class="password">
-        <h3 class="form-title">Password</h3>
-        <input type="text" placeholder="ENTER YOUR PASSWORD" id="Password" class="login-input" >
+      <div class="login">
+        <h2 class="login-title">Login</h2>
+        <p class="login-propery">
+          Add your details below to get back into the app
+        </p>
       </div>
-      <!-- button login -->
-       <button id="login-button" class="login-create-button">Login</button>
-    </div>
-    <div class="create-section">
-      <h3 class="form-title">Don't have an account?</h3>
-      <button class="create-account-button" onclick="createSection()"><h3 class="create-account-button-txt">Create account</h3></button>
-    </div>
-  </section>
-  <section id="sign-up">
-    <div id="logo">
-      <img src="./assets/images/logo-devlinks-small.svg" alt="logo">
-      <h1 class="logo-title">devlinks</h1>
-  </div>
-    <div class="create">
-      <h2 class="create-title">Create account</h2>
-      <p class="create-propery">Let’s get you started sharing your links!</p>
-    </div>
-    <div class="sign-up-form">
-      <div class="email">
-        <h3 class="form-title">Email address</h3>
-        <input type="text" placeholder="e.g.alex@email.com" id="signUpMail" class="login-input" >
+      <div class="login-form">
+        <div class="email">
+          <h3 class="form-title">Email address</h3>
+          <input
+            type="email"
+            placeholder="e.g.alex@email.com"
+            id="email-login"
+            class="login-input"
+          />
+        </div>
+        <div class="password">
+          <h3 class="form-title">Password</h3>
+          <input
+            type="password"
+            placeholder="ENTER YOUR PASSWORD"
+            id="password-login"
+            class="login-input"
+          />
+        </div>
+        <!-- button login -->
+        <button id="login-button" class="login-create-button">Login</button>
       </div>
-      <div class="password">
-        <h3 class="form-title">Create password</h3>
-        <input type="password" placeholder="ENTER YOUR PASSWORD" id="password" class="login-input" >
+      <div class="create-section">
+        <h3 class="form-title">Don't have an account?</h3>
+        <button class="create-account-button" onclick="showSignUpSection()">
+          <h3 class="create-account-button-txt">Create account</h3>
+        </button>
       </div>
-      <p class="password-requirment">Password must contain at least 8 characters</p>
-      <!-- button create -->
-       <button id="create-button" class="login-create-button">create new account</button>
-    </div>
-  </section>
+    </section>
+    <section id="sign-up" style="display: none">
+      <div id="logo">
+        <img src="./assets/images/logo-devlinks-small.svg" alt="logo" />
+        <h1 class="logo-title">devlinks</h1>
+      </div>
+      <div class="create">
+        <h2 class="create-title">Create account</h2>
+        <p class="create-propery">Let’s get you started sharing your links!</p>
+      </div>
+      <div class="sign-up-form">
+        <div class="email">
+          <h3 class="form-title">Email address</h3>
+          <input
+            type="email"
+            placeholder="e.g.alex@email.com"
+            id="signUpMail"
+            class="login-input"
+          />
+        </div>
+        <div class="password">
+          <h3 class="form-title">Create password</h3>
+          <input
+            type="password"
+            placeholder="ENTER YOUR PASSWORD"
+            id="signUpPassword"
+            class="login-input"
+          />
+        </div>
+        <p class="password-requirment">
+          Password must contain at least 8 characters
+        </p>
+        <!-- button create -->
+        <button id="create-button" class="login-create-button">
+          create new account
+        </button>
+        <h3 class="back-to-login">
+          already have an account?
+          <button class="back-to-login-btn" onclick="backTologin()">
+            Login
+          </button>
+        </h3>
+      </div>
+    </section>
 
-
-
-
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    import {getAuth} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {getFirestore} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyDHJJeHE04bm-pI4-1e5uO0qO8gyhW4yPA",
-      authDomain: "link-share-app-40505.firebaseapp.com",
-      databaseURL: "https://link-share-app-40505-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "link-share-app-40505",
-      storageBucket: "link-share-app-40505.appspot.com",
-      messagingSenderId: "230201461005",
-      appId: "1:230201461005:web:5f4e723f06f71be3c64844",
-      measurementId: "G-P5B9Z7HMSL"
-    };
-  
-    // make auth and firestore references
-    const auth = getAuth(getAuth);
-    const db = Firestore(firestore);
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-
-<script src="./main.js"></script>
-</body>
+    <script src="./scripts/main.js"></script>
+  </body>
 </html>
