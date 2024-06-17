@@ -32,7 +32,6 @@ const signOutBtn = document.getElementById('sign-out');
 
 signOutBtn.addEventListener('click', function (event) {
   event.preventDefault();
-  const auth = getAuth();
   signOut(auth).then(() => {
     // Sign-out successful.
     alert('sign outt');
