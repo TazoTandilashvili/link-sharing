@@ -24,82 +24,6 @@ function backTologin() {
 
 // add new link
 const addnewLink = function () {
-  const containerMome = document.querySelector('.add-link-section');
-  const platformMome = document.querySelector('.choice-list');
-  const instructionSection = document.querySelector('.instruction-section');
-
-  // todo list div create
-  instructionSection.style.display = 'none';
-
-  const iconSrc = [
-    'GitHub',
-    'Frontend Mentor',
-    'Twitter',
-    'LinkedIn',
-    'YouTube',
-    'Facebook',
-    'Twitch',
-    'Dev.to',
-    'Codewars',
-    'Codepen',
-    'freeCodeCamp',
-    'GitLab',
-    'Hashnode',
-    'Stack Overflow'
-  ];
-
-
-  function generateIconSrc(iconName) {
-    return `
-        <div href="#${iconName.toLowerCase().replace(/\s+/g, '-')}" class="icon-item">
-            <img src="./assets/images/icon-${iconName.toLowerCase().replace(/\s+/g, '-')}.svg" alt="${iconName} icon" />
-            <h4>${iconName}</h4>
-        </div>
-    `;
-  }
-  function addNewLinkContainer() {
-    const choiceListContent = iconSrc.map(iconName => generateIconSrc(iconName)).join('');
-
-    const container = `
-    <div class="link-lists">
-        <div class="link-property">
-            <div class="link-1">
-                <img src="./assets/images/icon-drag-and-drop.svg" alt="" />
-                <h3 class="link-count">Link#1</h3>
-            </div>
-            <button class="remove-link">Remove</button>
-        </div>
-        <div class="platform-choice">
-            <h4 class="platform-names">Platform</h4>
-            <button class="dropdown-choose">
-                <img src="" alt="" id="choosed-icon" />
-                <h4 id="choosed-text">Choose link</h4>
-                <img src="./assets/images/icon-chevron-down.svg" alt="" />
-            </button>
-            <div class="choice-list">
-                ${choiceListContent}
-            </div>
-        </div>
-    </div>
-`;
-
-
-    // Insert the container into the DOM
-    const containerMome = document.querySelector('.add-link-section');
-    containerMome.insertAdjacentHTML('afterbegin', container);
-  }
-
-  // Example: Add multiple containers
-
-
-
-  iconSrc.forEach(iconSrcs => {
-    console.log(iconSrcs,)
-  })
-  // Construct the HTML structure using innerHTML
-  for (let i = 0; i < 3; i++) {
-    addNewLinkContainer();
-  }
 
   // todo remove button functionally
   const removeLinks = document.querySelectorAll('.remove-link');
@@ -116,38 +40,98 @@ const addnewLink = function () {
     })
   })
 
-  // todo dropdown choose link
-  const dropdownChoosBtns = document.querySelectorAll('.dropdown-choose');
-  const choiceList = document.querySelectorAll('.choice-list');
-  const aTags = document.querySelectorAll('.choice-list div');
-  dropdownChoosBtns.forEach(dropdownChoosBtn => {
-    dropdownChoosBtn.addEventListener('click', function () {
+  const instructionSection = document.querySelector('.instruction-section');
 
-      choiceList.forEach(choiceLists => {
-        choiceLists.style.display = "flex";
-      });
+  // todo list div create
+  instructionSection.style.display = 'none';
 
-      // Show only the corresponding choice list
-      const currentChoiceList = choiceLists[index];
-      currentChoiceList.style.display = "flex";
+  // Function to generate choice list HTML based on iconSrc array
+  function generateChoiceList() {
+    const iconSrc = [
+      'GitHub', 'Frontend Mentor', 'Twitter', 'LinkedIn', 'YouTube',
+      'Facebook', 'Twitch', 'Dev.to', 'Codewars', 'Codepen',
+      'freeCodeCamp', 'GitLab', 'Hashnode', 'Stack Overflow'
+    ];
 
-      aTags.forEach(aTag => {
-        aTag.addEventListener('click', function (event) {
-          event.preventDefault();
-          const choosedIcon = document.getElementById('choosed-icon');
-          const choosedText = document.getElementById('choosed-text');
+    return iconSrc.map(iconName => `
+      <div href="#${iconName.toLowerCase().replace(/\s+/g, '-')}" class="icon-item">
+          <img src="./assets/images/icon-${iconName.toLowerCase().replace(/\s+/g, '-')}.svg" alt="${iconName} icon" />
+          <h4>${iconName}</h4>
+      </div>
+  `).join('');
+  }
 
-          const imgElement = aTag.querySelector('img');
-          const textElement = aTag.querySelector('h4');
+  // Function to add a new link container with dynamic choice list
+  function addNewLinkContainer() {
+    // Create a container element
+    const container = document.createElement('div');
+    container.classList.add('link-lists');
 
-          const imgSrc = imgElement.getAttribute('src');
-          choosedText.textContent = textElement.textContent
-          choosedIcon.src = imgSrc;
-          currentChoiceList.style.display = "none";
-        });
+    // Construct the inner HTML for the container
+    container.innerHTML = `
+      <div class="link-property">
+          <div class="link-1">
+              <img src="./assets/images/icon-drag-and-drop.svg" alt="" />
+              <h3 class="link-count">Link#1</h3>
+          </div>
+          <button class="remove-link">Remove</button>
+      </div>
+      <div class="platform-choice">
+          <h4 class="platform-names">Platform</h4>
+          <button class="dropdown-choose">
+              <img src="" alt="" class="choosed-icon" />
+              <h4 class="choosed-text">Choose link</h4>
+              <img src="./assets/images/icon-chevron-down.svg" alt="" />
+          </button>
+          <div class="choice-list">
+              ${generateChoiceList()}
+          </div>
+      </div>
+      <div class="link-platform">
+            <h4 class="platform-names">link</h4>
+            <div class="link-inputField">
+              <input type="text" placeholder="e.g https:" class="link-input" />
+            </div>
+          </div>
+  `;
+
+    // Add event listener for the dropdown-choose button
+    const dropdownChooseBtn = container.querySelector('.dropdown-choose');
+    dropdownChooseBtn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      const choiceList = container.querySelector('.choice-list');
+      choiceList.style.display = choiceList.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Add event listeners for each choice item
+    const choiceItems = container.querySelectorAll('.choice-list .icon-item');
+    choiceItems.forEach(item => {
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
+        const choosedIcon = container.querySelector('.choosed-icon');
+        const choosedText = container.querySelector('.choosed-text');
+
+        const imgElement = item.querySelector('img');
+        const textElement = item.querySelector('h4');
+
+        const imgSrc = imgElement.getAttribute('src');
+        choosedIcon.src = imgSrc;
+        choosedText.textContent = textElement.textContent;
+
+        const choiceList = container.querySelector('.choice-list');
+        choiceList.style.display = 'none';
       });
     });
-  })
+
+    // Insert the container at the top of the .add-link-section
+    const containerMome = document.querySelector('.add-link-section');
+    const firstContainer = containerMome.firstChild;
+    containerMome.insertBefore(container, firstContainer);
+  }
+
+  // Example usage: Generating and inserting a new link list container
+  addNewLinkContainer();
+
 
 }
 
