@@ -25,6 +25,7 @@ function backTologin() {
 // add new link
 const addnewLink = function () {
   const containerMome = document.querySelector('.add-link-section');
+  const platformMome = document.querySelector('.choice-list');
   const instructionSection = document.querySelector('.instruction-section');
 
   // todo list div create
@@ -49,57 +50,56 @@ const addnewLink = function () {
 
 
   function generateIconSrc(iconName) {
-    return `./assets/images/icon-${iconName}.svg`;
+    return `
+        <div href="#${iconName.toLowerCase().replace(/\s+/g, '-')}" class="icon-item">
+            <img src="./assets/images/icon-${iconName.toLowerCase().replace(/\s+/g, '-')}.svg" alt="${iconName} icon" />
+            <h4>${iconName}</h4>
+        </div>
+    `;
   }
+  function addNewLinkContainer() {
+    const choiceListContent = iconSrc.map(iconName => generateIconSrc(iconName)).join('');
+
+    const container = `
+    <div class="link-lists">
+        <div class="link-property">
+            <div class="link-1">
+                <img src="./assets/images/icon-drag-and-drop.svg" alt="" />
+                <h3 class="link-count">Link#1</h3>
+            </div>
+            <button class="remove-link">Remove</button>
+        </div>
+        <div class="platform-choice">
+            <h4 class="platform-names">Platform</h4>
+            <button class="dropdown-choose">
+                <img src="" alt="" id="choosed-icon" />
+                <h4 id="choosed-text">Choose link</h4>
+                <img src="./assets/images/icon-chevron-down.svg" alt="" />
+            </button>
+            <div class="choice-list">
+                ${choiceListContent}
+            </div>
+        </div>
+    </div>
+`;
+
+
+    // Insert the container into the DOM
+    const containerMome = document.querySelector('.add-link-section');
+    containerMome.insertAdjacentHTML('afterbegin', container);
+  }
+
+  // Example: Add multiple containers
+
+
+
   iconSrc.forEach(iconSrcs => {
     console.log(iconSrcs,)
   })
   // Construct the HTML structure using innerHTML
-  const container = `
-    <div class="link-lists">
-          <div class="link-property">
-            <h3 class="link-1">
-              <img src="./assets/images/icon-drag-and-drop.svg" alt="" />Link#1
-            </h3>
-            <button class="remove-link">Remove</button>
-          </div>
-          <div class="platform-choice">
-            <h4 class="platform-names">Platform</h4>
-            <button class="dropdown-choose">
-              <img src="" alt="" id="choosed-icon" />
-              <h4 id="choosed-text">Choose link</h4>
-              <img src="./assets/images/icon-chevron-down.svg" alt="" />
-            </button>
-            <div class="choice-list">
-              <div href="#github">
-                <img src="./assets/images/icon-github.svg" alt="github-icon" />
-                <h4>GitHub</h4>
-              </div>
-              <div href="#frontend-mentortemas">
-                <img
-                  src="./assets/images/icon-frontend-mentor.svg"
-                  alt="icon-frontend-mentor"
-                />
-                <h4>Frontend Mentor</h4>
-              </div>
-              <div href="#twitter">
-                <img
-                  src="./assets/images/icon-twitter.svg"
-                  alt="icon-twitter"
-                />
-                <h4>twitter</h4>
-              </div>
-            </div>
-          </div>
-          <div class="link-platform">
-            <h4 class="platform-names">link</h4>
-            <div class="link-inputField">
-              <input type="text" placeholder="e.g https:" class="link-input" />
-            </div>
-          </div>
-        </div>
-  `;
-  containerMome.insertAdjacentHTML('afterbegin', container);
+  for (let i = 0; i < 3; i++) {
+    addNewLinkContainer();
+  }
 
   // todo remove button functionally
   const removeLinks = document.querySelectorAll('.remove-link');
