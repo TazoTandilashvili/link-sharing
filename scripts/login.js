@@ -39,9 +39,7 @@ submitButton.addEventListener('click', function (event) {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      alert('LOGGING INN...')
-      // ...
-      window.location.href = 'preview.html'
+      window.location.href = 'profile.html'
     })
     .catch((error) => {
       const errorCode = error.code;

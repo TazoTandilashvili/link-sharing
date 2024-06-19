@@ -34,7 +34,6 @@ signOutBtn.addEventListener('click', function (event) {
   event.preventDefault();
   signOut(auth).then(() => {
     // Sign-out successful.
-    alert('sign outt');
     window.location.href = "index.html"
   }).catch((error) => {
     // An error happened.

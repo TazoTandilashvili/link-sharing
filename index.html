@@ -31,21 +31,35 @@
       <div class="login-form">
         <div class="email">
           <h3 class="form-title">Email address</h3>
-          <input
-            type="email"
-            placeholder="e.g.alex@email.com"
-            id="email-login"
-            class="login-input"
-          />
+          <label style="position: relative">
+            <img
+              src="./assets/images/icon-email.svg"
+              alt="email-icon"
+              class="email-icon"
+            />
+            <input
+              type="email"
+              placeholder="e.g.alex@email.com"
+              id="email-login"
+              class="login-input"
+            />
+          </label>
         </div>
         <div class="password">
           <h3 class="form-title">Password</h3>
-          <input
-            type="password"
-            placeholder="ENTER YOUR PASSWORD"
-            id="password-login"
-            class="login-input"
-          />
+          <label style="position: relative">
+            <img
+              src="./assets/images/icon-password.svg"
+              alt="pass-icon"
+              class="pass-icon"
+            />
+            <input
+              type="password"
+              placeholder="ENTER YOUR PASSWORD"
+              id="password-login"
+              class="login-input"
+            />
+          </label>
         </div>
         <!-- button login -->
         <button id="login-button" class="login-create-button">Login</button>
@@ -69,21 +83,35 @@
       <div class="sign-up-form">
         <div class="email">
           <h3 class="form-title">Email address</h3>
-          <input
-            type="email"
-            placeholder="e.g.alex@email.com"
-            id="signUpMail"
-            class="login-input"
-          />
+          <label style="position: relative">
+            <img
+              src="./assets/images/icon-email.svg"
+              alt="email-icon"
+              class="email-icon"
+            />
+            <input
+              type="email"
+              placeholder="e.g.alex@email.com"
+              id="signUpMail"
+              class="login-input"
+            />
+          </label>
         </div>
         <div class="password">
           <h3 class="form-title">Create password</h3>
-          <input
-            type="password"
-            placeholder="ENTER YOUR PASSWORD"
-            id="signUpPassword"
-            class="login-input"
-          />
+          <label style="position: relative">
+            <img
+              src="./assets/images/icon-password.svg"
+              alt="pass-icon"
+              class="pass-icon"
+            />
+            <input
+              type="password"
+              placeholder="At least .8 characters"
+              id="signUpPassword"
+              class="login-input"
+            />
+          </label>
         </div>
         <p class="password-requirment">
           Password must contain at least 8 characters
@@ -94,6 +122,7 @@
         </button>
         <h3 class="back-to-login">
           already have an account?
+          <br />
           <button class="back-to-login-btn" onclick="backTologin()">
             Login
           </button>

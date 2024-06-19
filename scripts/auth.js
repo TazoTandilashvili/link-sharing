@@ -37,7 +37,6 @@ submitButton.addEventListener('click', function (event) {
     .then((userCredential) => {
       // Signed up 
       const user = userCredential.user;
-      alert('creating ACCOUNT...')
       // ...
     })
     .catch((error) => {
